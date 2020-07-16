@@ -68,13 +68,12 @@ def get_view(request, pk):
     except Http404:
         return render(request, 'api/404.html')
     try:
-        time =  str(file.death_time - datetime.datetime.now())
+        context = {'death_time': str(file.death_time - datetime.datetime.now()),
+                   'id': file.id,
+                   'name': file.name}
+
+
+        return render(request, 'api/file_view.html', context=context)
     except Exception as e:
-        return HttpResponse(e, time, type(file.death_time))
-    context = {'death_time': str(file.death_time - datetime.datetime.now()),
-               'id': file.id,
-               'name': file.name}
-
-
-    return render(request, 'api/file_view.html', context=context)
+        return HttpResponse(e)
 
