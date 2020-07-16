@@ -50,7 +50,7 @@ function buildList(){
             death_time = `${death_time.getHours()}:${death_time.getMinutes()}:${death_time.getSeconds()}`
             var name = `<span class="title">${list[i].name}</span>`
             var item = `
-                <div id="data-row-${i}" class="task-wrapper flex-wrapper" href="https://evo-test-pasha.herokuapp.com/api/get_view/${list[i].id}">
+                <div id="data-row-${i}" class="task-wrapper flex-wrapper" >
                     <div style="flex:7">
                         ${name}
                     </div>
@@ -58,6 +58,9 @@ function buildList(){
              
                         <small id="death-${i}">Delete time: ${death_time}</small>
                              
+                    </div>
+                    <div>
+                    <a href="https://evo-test-pasha.herokuapp.com/api/get_view/${list[i].id}">File page</a> 
                     </div>
                     <div style="flex:1">
                         <a href="https://evo-test-pasha.herokuapp.com/api/get/${list[i].id}">Download</a>     
