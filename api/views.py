@@ -74,7 +74,7 @@ def get_view(request, pk):
 
         try:
             return render(request, 'api/file_view.html', context=context)
-        except:
-            return HttpResponse('render failed')
+        except Exception as e:
+            return HttpResponse(e)
     except Exception as e:
         return HttpResponse(e)
