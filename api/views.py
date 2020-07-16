@@ -20,17 +20,20 @@ def get_all(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+
 def get(request, pk):
-    """Function for sending file when download clicked"""
     try:
-        file = get_object_or_404(File, pk=pk)
-    except Http404:
-        return render(request, 'api/404.html')
+        """Function for sending file when download clicked"""
+        try:
+            file = get_object_or_404(File, pk=pk)
+        except Http404:
+            return render(request, 'api/404.html')
 
-    resp = open(file.file.path, 'rb')
+        resp = open(file.file.path, 'rb')
 
-    return FileResponse(resp)
+        return FileResponse(resp)
+    except Exception as e:
+        return e
  
 @api_view(['POST'])
 def create(request):
@@ -58,13 +61,16 @@ def create(request):
     else:
         return Response(serializer.error_messages, status=400)
 
-@api_view(['GET'])
+
 def get_view(request, pk):
     try:
-        file = get_object_or_404(File, pk=pk)
-    except Http404:
-        return render(request, 'api/404.html')
+        try:
+            file = get_object_or_404(File, pk=pk)
+        except Http404:
+            return render(request, 'api/404.html')
 
-    context = {'death_time': file.death_time,
-               'id': file.id}
-    return render(request, 'api/file_view.html', context=context)
+        context = {'death_time': file.death_time,
+                   'id': file.id}
+        return render(request, 'api/file_view.html', context=context)
+    except Exception as e:
+        return e
