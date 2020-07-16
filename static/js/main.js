@@ -63,7 +63,7 @@ function buildList(){
                     <a href="https://evo-test-pasha.herokuapp.com/api/get_view/${list[i].id}" style="padding-right: 3px">File page</a> 
                     </div>
                     <div style="flex:1">
-                        <a href="https://evo-test-pasha.herokuapp.com/api/get/${list[i].id}">Download</a>     
+                        <a href="https://evo-test-pasha.herokuapp.com/api/get/${list[i].id}" download="https://evo-test-pasha.herokuapp.com/api/get/${list[i].id}">Download</a>     
                     </div>
                      
                 </div>

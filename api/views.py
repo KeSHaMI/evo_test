@@ -49,7 +49,7 @@ def create(request):
 
         time = (file.death_time - file.date_created).seconds
         # if time is less then current timedelta will be huge e.g. 86754 seconds
-        if time > 10000:
+        if file.death_time < file.date_created:
             #Deleting file if time invalid
             """Of course it's better to not upload file if time invalid, but serializer don't have date_created
              and death_time cannot fit datetime.now(), so to avoid some issues I'm making it like this)"""
