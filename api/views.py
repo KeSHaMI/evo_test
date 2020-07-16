@@ -1,17 +1,19 @@
+from django.http import FileResponse
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import FileSerializer
-from .models import File
-from django.shortcuts import get_object_or_404
-from django.http import Http404
-from django.shortcuts import render
+
 from .tasks import delete_file
-from django.http import FileResponse, HttpResponseNotFound, HttpResponse
-import datetime
+from .models import File
+from .serializers import FileSerializer
+
 
 @api_view(['GET'])
 def get_all(request):
+
     """View which gives all files currently on the server"""
     files = File.objects.all().order_by('-id')
 
@@ -22,22 +24,22 @@ def get_all(request):
 
 
 def get(request, pk):
+
+    """Function for sending file when download clicked"""
     try:
-        """Function for sending file when download clicked"""
-        try:
-            file = get_object_or_404(File, pk=pk)
-        except Http404:
-            return render(request, 'api/404.html')
+        file = get_object_or_404(File, pk=pk)
+    except Http404:
+        return render(request, 'api/404.html')
 
-        resp = open(file.file.path, 'rb')
+    resp = open(file.file.path, 'rb')
 
-        return FileResponse(resp)
-    except Exception as e:
-        return HttpResponse(e)
+    return FileResponse(resp)
+
  
 @api_view(['POST'])
 def create(request):
 
+    """Creating File model and launching delete function"""
     serializer = FileSerializer(data=request.data)
 
     if serializer.is_valid():
@@ -63,17 +65,18 @@ def create(request):
 
 
 def get_view(request, pk):
+
+    """Sending model's info and rendering template"""
     try:
         file = get_object_or_404(File, pk=pk)
     except Http404:
         return render(request, 'api/404.html')
-    try:
-        context = {'death_time': str(file.death_time - datetime.datetime.now()),
-                   'id': file.id,
-                   'name': file.name}
+
+    context = {'death_time': file.death_time,
+               'id': file.id,
+               'name': file.name}
 
 
-        return render(request, 'api/file_view.html', context=context)
-    except Exception as e:
-        return HttpResponse(e)
+    return render(request, 'api/file_view.html', context=context)
+
 
