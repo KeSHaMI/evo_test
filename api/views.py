@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from django.shortcuts import render
 from .tasks import delete_file
-from django.http import FileResponse, HttpResponseNotFound
+from django.http import FileResponse, HttpResponseNotFound, HttpResponse
 
 
 @api_view(['GET'])
@@ -33,7 +33,7 @@ def get(request, pk):
 
         return FileResponse(resp)
     except Exception as e:
-        return e
+        return HttpResponse(e)
  
 @api_view(['POST'])
 def create(request):
@@ -73,4 +73,4 @@ def get_view(request, pk):
                    'id': file.id}
         return render(request, 'api/file_view.html', context=context)
     except Exception as e:
-        return e
+        return HttpResponse(e)
