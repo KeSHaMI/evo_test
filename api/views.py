@@ -71,6 +71,10 @@ def get_view(request, pk):
 
         context = {'death_time': file.death_time,
                    'id': file.id}
-        return render(request, 'api/file_view.html', context=context)
+
+        try:
+            return render(request, 'api/file_view.html', context=context)
+        except:
+            return HttpResponse('render failed')
     except Exception as e:
         return HttpResponse(e)
