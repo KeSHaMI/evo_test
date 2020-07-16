@@ -65,8 +65,6 @@ def get_view(request, pk):
     except Http404:
         return render(request, 'api/404.html')
 
-    death_time = file.death_time.strftime("%H:%M:%S")
-
-    context = {'death_time': death_time,
+    context = {'death_time': file.death_time,
                'id': file.id}
     return render(request, 'api/file_view.html', context=context)
