@@ -127,10 +127,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
 MEDIA_URL = '/files/'
 
@@ -147,11 +146,11 @@ DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True
 CACHES = {
     "default": {
          "BACKEND": "redis_cache.RedisCache",
-         "LOCATION": 'redis://h:pe80f25122c450b68343766bd33d8ea34561ac854d51d5eb06b2eacf5ba356ce1@ec2-54-72-139-24.eu-west-1.compute.amazonaws.com:25299',
+         "LOCATION": os.environ.get('REDIS_URL'),
     }
 }
 
-CELERY_BROKER_URL = 'redis://h:pe80f25122c450b68343766bd33d8ea34561ac854d51d5eb06b2eacf5ba356ce1@ec2-54-72-139-24.eu-west-1.compute.amazonaws.com:25299'
+CELERY_BROKER_URL = os.environ.get('REDIS_URL')
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
