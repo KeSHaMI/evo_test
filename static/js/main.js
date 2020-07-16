@@ -142,6 +142,9 @@ form.addEventListener('submit', function(e){
         if (response.status === 403){
             alert('Invalid time!')
         }
+        if (response.status === 400){
+            alert('Fill all fields!')
+        }
         buildList()
         document.getElementById('form').reset()
     })
