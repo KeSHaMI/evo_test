@@ -64,17 +64,14 @@ def create(request):
 
 def get_view(request, pk):
     try:
-        try:
-            file = get_object_or_404(File, pk=pk)
-        except Http404:
-            return render(request, 'api/404.html')
+        file = get_object_or_404(File, pk=pk)
+    except Http404:
+        return render(request, 'api/404.html')
 
-        context = {'death_time': file.death_time,
-                   'id': file.id}
+    context = {'death_time': file.death_time.strftime('%H:%M:%S'),
+               'id': file.id,
+               'name': file.name}
 
-        try:
-            return render(request, 'api/file_view.html', context=context)
-        except Exception as e:
-            return HttpResponse(e)
-    except Exception as e:
-        return HttpResponse(e)
+
+    return render(request, 'api/file_view.html', context=context)
+
