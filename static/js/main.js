@@ -73,7 +73,7 @@ function buildList(){
                     </div>
                     <div style="flex:10">
              
-                        <small id="death-${i}">Death time: ${death_time}</small>
+                        <small id="death-${i}">Delete time: ${death_time}</small>
                              
                     </div>
                     <div style="flex:1">
