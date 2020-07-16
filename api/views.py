@@ -8,7 +8,7 @@ from django.http import Http404
 from django.shortcuts import render
 from .tasks import delete_file
 from django.http import FileResponse, HttpResponseNotFound, HttpResponse
-
+import datetime
 
 @api_view(['GET'])
 def get_all(request):
@@ -68,7 +68,7 @@ def get_view(request, pk):
     except Http404:
         return render(request, 'api/404.html')
 
-    context = {'death_time': file.death_time.strftime('%H:%M:%S'),
+    context = {'death_time': str(file.death_time - datetime.datetime.now()),
                'id': file.id,
                'name': file.name}
 
