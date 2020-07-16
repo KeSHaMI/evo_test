@@ -25,7 +25,7 @@ SECRET_KEY = 'sdv8yh135[b\=gnbu10t[bp1rfafbebq[obq' #I know how to save secret_k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'evo-test-pasha.heroku.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'evo-test-pasha.herokuapp.com']
 
 
 # Application definition
