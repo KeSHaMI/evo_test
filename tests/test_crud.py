@@ -1,7 +1,7 @@
 import requests
 import datetime
 id = 50 ##id need to be relevant
-url = 'https://keshami.pythonanywhere.com/api/'
+url = 'http://evo-test-pasha.heroku.com/api/'
 
 
 def test_create():

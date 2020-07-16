@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sdv8yh135[b\=gnbu10t[bp1rfafbebq[obq'
+SECRET_KEY = 'sdv8yh135[b\=gnbu10t[bp1rfafbebq[obq' #I know how to save secret_key in enviromental variables
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'https://keshami.pythonanywhere.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'evo-test-pasha.heroku.com']
 
 
 # Application definition
@@ -86,16 +86,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'evo_test',
-        'USER' : 'postgres',
-        'PASSWORD': '738419pm', #I can save credetntial in enviromental variables(made on other project)
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
-    }
-}
+
 
 
 # Password validation
@@ -144,8 +135,18 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/files')
 
+### Heroku section
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CACHES = {
+    "default": {
+         "BACKEND": "redis_cache.RedisCache",
+         "LOCATION": os.environ.get('REDIS_URL'),
+    }
+}
+
+CELERY_BROKER_URL = os.environ['REDIS_URL']
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

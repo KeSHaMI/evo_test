@@ -45,7 +45,7 @@ function buildList(){
     var wrapper = document.getElementById('list-wrapper')
 
 
-    var url = 'https://keshami.pythonanywhere.com/api/get_all/'
+    var url = 'http://evo-test-pasha.heroku.com//get_all/'
 
     fetch(url)
     .then((resp) => resp.json())
@@ -77,7 +77,7 @@ function buildList(){
                              
                     </div>
                     <div style="flex:1">
-                        <a href="https://keshami.pythonanywhere.com/api/get/${list[i].id}">Download</a>     
+                        <a href="http://evo-test-pasha.heroku.com/api/get/${list[i].id}">Download</a>     
                     </div>
                      
                 </div>
@@ -108,7 +108,7 @@ var form = document.getElementById('form-wrapper')
 form.addEventListener('submit', function(e){
     e.preventDefault()
     console.log('Form submitted')
-    var url = 'https://keshami.pythonanywhere.com/api/create/'
+    var url = 'http://evo-test-pasha.heroku.com/api/create/'
 
     var title = document.getElementById('title').value
     var death_time = document.getElementById('settime').value.split(':')
