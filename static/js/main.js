@@ -1,21 +1,4 @@
-/*
-    KEY COMPONENTS:
-    "activeItem" = null until an edit button is clicked. Will contain object of item we are editing
-    "list_snapshot" = Will contain previous state of list. Used for removing extra rows on list update
-
-    PROCESS:
-    1 - Fetch Data and build rows "buildList()"
-    2 - Create Item on form submit
-    3 - Edit Item click - Prefill form and change submit URL
-    4 - Delete Item - Send item id to delete URL
-    5 - Cross out completed task - Event handle updated item
-
-    NOTES:
-    -- Add event handlers to "edit", "delete", "title"
-    -- Render with strike through items completed
-    -- Remove extra data on re-render
-    -- CSRF Token
-*/
+/*Maybe some unnecessary variables here, cause I've token block of code and then fit it to my needs*/
 
 function getCookie(name) {
     var cookieValue = null;
@@ -67,7 +50,7 @@ function buildList(){
             death_time = `${death_time.getHours()}:${death_time.getMinutes()}:${death_time.getSeconds()}`
             var name = `<span class="title">${list[i].name}</span>`
             var item = `
-                <div id="data-row-${i}" class="task-wrapper flex-wrapper">
+                <div id="data-row-${i}" class="task-wrapper flex-wrapper" href="https://evo-test-pasha.herokuapp.com/api/get_view/${list[i].id}">
                     <div style="flex:7">
                         ${name}
                     </div>
@@ -83,8 +66,9 @@ function buildList(){
                 </div>
                 `
 
-
             wrapper.innerHTML += item
+
+
 
         }
 

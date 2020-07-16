@@ -6,7 +6,7 @@ from .models import File
 
 @shared_task
 def delete_file(**kwargs):
-    print(kwargs['time'])
+    """Deleting time when after sleed delay"""
     time.sleep(kwargs['time'])
     file = File.objects.get(pk=kwargs['file']['id'])
     file.delete()
